@@ -1,4 +1,4 @@
-# 🗂️ TaskCLI — Python Project & Task Tracker  
+# 🗂️ TasCLI — Python Project & Task Tracker  
 
 A lightweight, terminal-based project tracker built entirely in Python.  
 Designed for learning clean architecture, modular design, and data persistence using JSON.  
@@ -45,27 +45,10 @@ Designed for learning clean architecture, modular design, and data persistence u
 
 ---
 
-## 🧪 Manual Testing  
-
-You can manually test features using the built-in **tester.py** file (or by running `main.py`).  
-
-Typical test flow:  
-```bash
-python3 main.py
-```
-
-Then try:  
-- Adding new projects  
-- Adding multiple tasks  
-- Changing task statuses  
-- Deleting projects and verifying `data.json` updates  
-
----
-
 ## 📂 Project Structure  
 
 ```
-purelek/
+TasCLI/
 │
 ├── models.py        # Defines Project & Task classes
 ├── storage.py       # JSON saving/loading logic
@@ -90,10 +73,5 @@ purelek/
 ## 🧑‍💻 Author  
 
 **Ismail Jama Adan**  
-A software engineering student building real-world, maintainable Python systems while learning about architecture, modularity, and UI/UX flow in terminal environments.  
+A computer student building real-world, maintainable projects while learning about architecture, modularity, and UI/UX.  
 
----
-
-## ⚖️ License  
-
-MIT License — free to use, modify, and learn from.  
