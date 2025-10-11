@@ -72,6 +72,6 @@ TasCLI/
 
 ## 🧑‍💻 Author  
 
-**Ismail Jama Adan**  
+**Ismail Adan**  
 A computer student building real-world, maintainable projects while learning about architecture, modularity, and UI/UX.  
 
