@@ -1,7 +1,18 @@
+# ==================================================================== #
+#  File: main.py                                                       #       
+#  Author: Ismail Adan                                                 #
+#  Project: TasCLI                                                     #
+#  Description: Entry point for TasCLI,                                #
+#               controls the flow between the different programs.      #
+#               Connects UI with tracker functions                     #
+#  Created: October 2025                                               #
+#  Notes:                                                              #
+#      - Imports all logic from tracker and ui                         #
+#      - Ensure projects are saved before exit                         #
+# ==================================================================== #
+
 from tracker import *
 from ui import *
-
-current_projects, last_project_id = load_projects()
 
 while True:
     choice = show_home_screen(current_projects)
@@ -24,14 +35,14 @@ while True:
             delete_task(project, task_id)
         # 4 = Back
         elif(choice2 == 4):
-            show_home_screen()  
+            show_home_screen(current_projects)  
     # 2 = Add New Project                   
     elif(choice == 2):
         project_name = ask_for_project_name()
         create_project(project_name)
     # 3 = Delete Project             
     elif(choice == 3):
-        project_id = ask_for_project_id()
+        project_id = ask_for_project_id(current_projects)
         delete_project(project_id)
     # 4 = Exit             
     elif(choice == 4):
