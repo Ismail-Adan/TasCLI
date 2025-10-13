@@ -1,10 +1,23 @@
+# ==================================================================== #
+#  File: storage.py                                                    #       
+#  Author: Ismail Adan                                                 #
+#  Project: TasCLI                                                     #
+#  Description: Handles reading and writing of data                    #
+#               between files and persistent storage (JSON file).      #
+#               Includes functions for loading, saving,                #
+#               and ensuring data consistency.                         #
+#  Created: October 2025                                               #
+#  Notes:                                                              #
+#      - Used explicitly by tracker.py.                                #
+# ==================================================================== #
+
 import json
 import os
 from models import Project, Task
 
-def save_projects(projects):
+def save_projects(projects, filename="data.json"):
     last_project_id = 0
-    with open('data.json', 'w') as file:
+    with open(filename, 'w') as file:
         Project_Dicts = []
         for project in projects:
             Project_Dicts.append(project.to_dict())
@@ -12,9 +25,9 @@ def save_projects(projects):
         data = {'last_project_id': last_project_id, 'projects': Project_Dicts}
         json.dump(data, file, indent=4) 
 
-def load_projects():
-    if( os.path.exists('data.json') ):
-        with open('data.json', 'r') as file:
+def load_projects(filename="data.json"):
+    if( os.path.exists(filename) ):
+        with open(filename, 'r') as file:
             Project_list = []
             data = json.load(file)
             last_project_id = data.get("last_project_id", 0)
