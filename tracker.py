@@ -1,3 +1,15 @@
+# ==================================================================== #
+#  File: tracker.py                                                    #       
+#  Author: Ismail Adan                                                 #
+#  Project: TasCLI                                                     #
+#  Description: Core logic layer controlling projects and tasks.       #
+#               Manages in-memory state and syncs with JSON storage.   #
+#  Created: October 2025                                               #
+#  Notes:                                                              #
+#      - current_projects and last_project_id are global state.        #
+#      - Automatically loads or initializes data.json on import.       #
+# ==================================================================== #
+
 from models import Project, Task
 from storage import *
 

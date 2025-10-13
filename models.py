@@ -1,3 +1,16 @@
+# ==================================================================== #
+#  File: models.py                                                     #       
+#  Author: Ismail Adan                                                 #
+#  Project: TasCLI                                                     #
+#  Description: Defines the data models used across the app,           #
+#               including Project and Task classes.                    #
+#               Each model includes simple helper methods              #
+#               and data representation logic.                         #
+#  Created: October 2025                                               #
+#  Notes:                                                              #
+#      - Lightweight classes (no persistence logic here).              #
+#      - Designed to be sent to JSON.                                  #
+# ==================================================================== #
 class Project:
     def __init__(self, name, id=None, last_task_id=0):
         self.id = id
