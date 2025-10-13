@@ -1,7 +1,18 @@
+# ==================================================================== #
+#  File: ui.py                                                         #       
+#  Author: Ismail Adan                                                 #
+#  Project: TasCLI                                                     #
+#  Description: Console-based user interface for TasCLI.               #
+#               Displays menus, captures user input,                   #
+#               and delegates logic to tracker.py.                     #
+#  Created: October 2025                                               #
+#  Notes:                                                              #
+#                                                                      #
+# ==================================================================== #
+
 from tracker import list_projects, list_tasks, valid_statuses
 
 def show_home_screen(current_projects):
-    valid_ids = [ p.id for p in current_projects ]
     print("Current projects:")
     # List projects and associated tasks in a simplified manner
     for p in list_projects():
@@ -26,12 +37,10 @@ def show_home_screen(current_projects):
     user_input = input("\n[1] View Project Details \n[2] Add New Project \n[3] Delete Project \n[4] Exit \n")
     try: 
         user_input = int(user_input)
-        if( user_input in valid_ids ):
-            return int(user_input)
+        return user_input
     except ValueError:
         pass
     return None
-
 
 def show_project_screen(project):
     print(f"[{project.id}] {project.name}")
@@ -55,7 +64,7 @@ def ask_for_project_name():
 def ask_for_project_id(current_projects):
     valid_ids = [ p.id for p in current_projects ]
     for p in list_projects():
-        print(f"[{p['id']}] {p['name']}")
+        print(f"{p['id']} {p['name']}")
     user_input = input("\nSelect a project id from the list above\n")
     try: 
         user_input = int(user_input)
@@ -84,7 +93,7 @@ def ask_for_task_info():
 # This function needs to provide the user with a dropdown of predefined statuses
 def ask_for_status_change(project):
     for t in list_tasks(project):
-        print(f"[{t['id']}] {t['name']} - {t['status']}")
+        print(f"{t['id']} {t['name']} - {t['status']}")
     task_id = input("Enter the task id you wish to change status of\n")
     status = input("Enter the new status\n")
     try: 
@@ -97,8 +106,6 @@ def ask_for_status_change(project):
     return None   
 
 # print(show_home_screen())
-
-# print(show_project_screen())
 
 # print(ask_for_project_name())
 
