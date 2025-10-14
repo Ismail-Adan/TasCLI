@@ -11,6 +11,7 @@
 #      - Lightweight classes (no persistence logic here).              #
 #      - Designed to be sent to JSON.                                  #
 # ==================================================================== #
+
 class Project:
     def __init__(self, name, id=None, last_task_id=0):
         self.id = id
@@ -66,28 +67,5 @@ class Task:
         task = cls(dictionary["id"], dictionary["name"], dictionary["status"],
                      dictionary["progress"], dictionary["desc"], dictionary["comments"])
         return task
-    
-# project = Project("Build MVP", id=7)
-
-# task1 = Task(1, "Download Rich via pip")
-# task2 = Task(2, "Start drafting")
-# task3 = Task(-1111, "XXXXXXXXXX")
-
-# project.add_task(task1)
-# project.add_task(task2)
-# project.add_task(task3)
-
-# print(project.to_dict())
-# print("\n")
-# project_dict = project.to_dict()
-# print(project_dict)
-
-# new_project = Project.from_dict(project_dict)
-# print(new_project.name)
-# print(new_project.id)
-# for task in new_project.tasks:
-#     print(task.id, task.name)
-
-# print(project.last_task_id)
 
 

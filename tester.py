@@ -1,12 +1,15 @@
 import os
 
-if( os.path.exists('data.json') ):
-    os.remove('data.json')
-
-from models import *
+if( os.path.exists('test_data.json') ):
+    os.remove('test_data.json')
+    
+import storage
+storage.DATA_FILE = "test_data.json"
 from tracker import *
 
-print("Creating a new project...")
+current_projects, last_project_id = load_projects()
+
+print("[1] Creating projects... ✅")
 create_project("Demo Project 1")
 create_project("Demo Project 2")
 create_project("Mobile App Development")
@@ -22,7 +25,7 @@ project3 = find_project_by_id(3)
 project4 = find_project_by_id(4)
 print("\nFound project:", project1.name)
 
-print("\nAdding tasks...")
+print("\n[2] Adding tasks... ✅")
 create_task(project1, "Set up repo", "Incomplete", "Initialize version control")
 create_task(project1, "Write tracker functions", "Completed", "Finish core logic")
 
@@ -45,10 +48,11 @@ print("\nTasks in project2:")
 for t in list_tasks(project2):
     print(f"{t.id} - {t.name} ({t.status})")
 
+print("\n[3] Checking progress... ✅")
 progress = calculate_progress(project2)
 print(f"\nProgress: {progress:.1f}%")
 
-print("\nChanging task 0 to 'Completed'...")
+print("\n[4] Changing status... ✅")
 change_task_status(project2, 1, "Completed")
 
 print(f"New progress: {calculate_progress(project2):.1f}%")
@@ -59,7 +63,7 @@ delete_task(project2, 1)
 for t in list_tasks(project2):
     print(f"{t.id} - {t.name}")
 
-print("\nDeleting project 3...")
+print("\n[5] Deleting projects... ✅")
 if(delete_project(3)):
     print("\nProject 3 deleted")
 else:
@@ -69,4 +73,11 @@ print("\nRemaining projects:")
 for p in list_projects():
     print(f"[{p['id']}] {p['name']} - {p['progress']}")
 
-print(Task.to_dict(find_task_by_id(project3, 3)))
+print("\n[6] Persistence check... ✅")
+save_projects(current_projects)  # force save
+reloaded, _ = load_projects()
+print("\nReloaded projects from file:")
+for p in reloaded:
+    print(f"[{p.id}] {p.name} ({len(p.tasks)} tasks)")
+
+os.remove("test_data.json")

@@ -19,19 +19,6 @@ def show_home_screen(current_projects):
         print(f"[{p['id']}] {p['name']} - {p['progress']}")
         # for t in list_tasks(find_project_by_id(p['id'])):
         #     print((" "*4+f"{t['id']} {t['name']} - {t['status']}"))
-    # projects_list = []
-    # task_list = []
-    # for project in current_projects:
-    #     progress = calculate_progress(project)
-    #     for t in list_tasks(project):
-    #         task_list.append(f"{t['id']} {t['name']} - {t['status']}")
-    #     projects_list.append({
-    #         "id": project.id,
-    #         "name": project.name,
-    #         "progress": f"{progress:.1f}%",
-    #         "tasks": task_list
-    #     })    
-    # print(projects_list)
     print("\n")
     print("Enter in a number from the following options")
     user_input = input("\n[1] View Project Details \n[2] Add New Project \n[3] Delete Project \n[4] Exit \n")
@@ -104,12 +91,3 @@ def ask_for_status_change(project):
     except ValueError:
         pass
     return None   
-
-# print(show_home_screen())
-
-# print(ask_for_project_name())
-
-# print(ask_for_project_id())
-
-# print(ask_for_status_change(find_project_by_id(1)))
-# print(show_project_screen(find_project_by_id(1)))
