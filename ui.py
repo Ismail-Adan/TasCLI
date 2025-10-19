@@ -11,6 +11,7 @@
 # ==================================================================== #
 
 from tracker import list_projects, list_tasks, valid_statuses
+from rich import print
 
 def show_home_screen(current_projects):
     print("Current projects:")
