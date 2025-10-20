@@ -12,16 +12,31 @@
 
 from tracker import list_projects, list_tasks, valid_statuses
 from rich import print
+from console import console
+
+# Helper methods
+def print_header(title):
+    console.print(f"[bold blue]{title}[/bold blue]")
+
+def print_divider():
+    console.rule()
+
+def print_success(msg):
+    console.print(f"[greem]{msg}[/green]")
+
+def print_error(msg):
+    console.print(f"[red]{msg}[/red]")
 
 def show_home_screen(current_projects):
-    print("Current projects:")
+    print_header("Current projects:")
     # List projects and associated tasks in a simplified manner
     for p in list_projects():
-        print(f"[{p['id']}] {p['name']} - {p['progress']}")
+        console.print(f"[blue][{p['id']}] {p['name']} - {p['progress']}")
         # for t in list_tasks(find_project_by_id(p['id'])):
         #     print((" "*4+f"{t['id']} {t['name']} - {t['status']}"))
+    print_divider()
     print("\n")
-    print("Enter in a number from the following options")
+    console.print("Enter in a number from the following options")
     user_input = input("\n[1] View Project Details \n[2] Add New Project \n[3] Delete Project \n[4] Exit \n")
     try: 
         user_input = int(user_input)
@@ -31,11 +46,14 @@ def show_home_screen(current_projects):
     return None
 
 def show_project_screen(project):
-    print(f"[{project.id}] {project.name}")
+    # console.print(f"[{project.id}] {project.name}")
+    console.print(f"Project: {project.name}")
+    console.print(f"ID: {project.id}")
     for t in list_tasks(project):
-        print(" "*4+f"{t['id']} {t['name']} - {t['status']}")
+        console.print("[green]"*4+f"    {t['id']} {t['name']} - {t['status']}")
+    print_divider()
     print("\n")
-    print("Enter in a number from the following options")
+    print_header("Enter in a number from the following options")
     user_input = input("\n[1] Add Task \n[2] Change Status \n[3] Delete Task \n[4] Back \n")
     try: 
         user_input = int(user_input)
@@ -52,7 +70,7 @@ def ask_for_project_name():
 def ask_for_project_id(current_projects):
     valid_ids = [ p.id for p in current_projects ]
     for p in list_projects():
-        print(f"{p['id']} {p['name']}")
+        console.print(f"{p['id']} {p['name']}")
     user_input = input("\nSelect a project id from the list above\n")
     try: 
         user_input = int(user_input)
@@ -81,7 +99,7 @@ def ask_for_task_info():
 # This function needs to provide the user with a dropdown of predefined statuses
 def ask_for_status_change(project):
     for t in list_tasks(project):
-        print(f"{t['id']} {t['name']} - {t['status']}")
+        console.print(f"{t['id']} {t['name']} - {t['status']}")
     task_id = input("Enter the task id you wish to change status of\n")
     status = input("Enter the new status\n")
     try: 
