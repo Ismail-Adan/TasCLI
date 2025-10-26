@@ -12,9 +12,10 @@
 # ==================================================================== #
 
 from tracker import *
-from ui import *
+from interface import *
 
 while True:
+    console.clear()
     choice = show_home_screen(current_projects)
     # 1 = View Project Details
     if(choice == 1):
