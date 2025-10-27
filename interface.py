@@ -11,6 +11,8 @@
 # ==================================================================== #
 
 from tracker import list_projects, list_tasks, valid_statuses
+import time
+from rich.live import Live
 from rich import print
 from console import console
 from rich.panel import Panel
@@ -28,6 +30,27 @@ def print_success(msg):
 
 def print_error(msg):
     console.print(f"[red]{msg}[/red]")
+
+def run_interface(current_projects):
+    table = Table(show_footer=True)
+    print(Panel.fit("[A] Add Project                  [S] Search                 [Q] Quit"))
+
+    with Live(table, auto_refresh=True, refresh_per_second=4):
+        # Clear table before each update to avoid stacking tables
+        table.columns.clear()
+        table.rows.clear()
+
+        # Setting up data
+        table.add_column("Projects", footer="[N] Next  [P] Previous [E] Edit", style="cyan", no_wrap=True)
+        table.add_column("Tasks", footer="[T] Add Task  [C] Change Status", style="green", no_wrap=True)
+
+        # Populate the table
+        for p in list_projects():
+            table.add_row(f"[{p['id']}] {p['name']} - {p['progress']}")
+        if table.rows: 
+            console.print(table)
+        else:
+            console.print("[i]No data...[/i]")
 
 def show_home_screen(current_projects):
     print(Panel.fit("[A] Add Project                  [S] Search                 [Q] Quit"))
@@ -49,12 +72,7 @@ def show_home_screen(current_projects):
     print("\n")
     console.print("Enter in a number from the following options")
     user_input = input("\n[1] View Project Details \n[2] Add New Project \n[3] Delete Project \n[4] Exit \n")
-    try: 
-        user_input = int(user_input)
-        return user_input
-    except ValueError:
-        pass
-    return None
+    return user_input
 
 def show_project_screen(project):
     # console.print(f"[{project.id}] {project.name}")
